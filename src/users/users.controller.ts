@@ -63,8 +63,8 @@ export class UsersController {
 
     @Post()
     public createUsers(@Body() createUserDto: CreateUserDto){
-        console.log(createUserDto instanceof CreateUserDto);
-        return ' You sent a psot request to the user endpint'
+        
+        return this.usersService.createUser(createUserDto);
         
     }
 
