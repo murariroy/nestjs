@@ -18,8 +18,13 @@ import { request } from 'http';
 import { CreateUserDto } from './dto/create-user.dto';
 import { GetUsersParamDto } from './dto/get-users-param.dto';
 import { PatchUserDto } from './dto/patch-user.dto';
+import { UsersService } from './providers/users.service';
 @Controller('users')
 export class UsersController {
+     constructor(
+      //injecting users serice
+      private readonly usersService:  UsersService,
+     ){}
 
 
      /**
@@ -52,10 +57,8 @@ export class UsersController {
           @Query('limit',new DefaultValuePipe(10),  ParseIntPipe) limit: number,
           @Query('page',new DefaultValuePipe(1),ParseIntPipe) page : number,
         ) {
-             console.log(getUserParamDto);
             
-             
-               return  "you sent a get request to users endpoints"
+            return  this.usersService.findAll(getUserParamDto,limit,page)
          }
 
 
