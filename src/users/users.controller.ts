@@ -29,32 +29,7 @@ export class UsersController {
       private readonly usersService:  UsersService,
      ){}
 
-
-     /**
-      * / userws ->  return all users with default pagination
-      * /users/123-> return one suer who id is 1234
-      * /users?limit=1-&page=2 -> return page 2 with limit  of pagination 10
-      *  
-      */
-
-
-
-    // @Get('/:id')
-    // public getUsers(@Param() params: any){
-    //     console.log(params);
-        
-    //     return " You sent a get request to user endpoints"
-    // }
-
-
-
-    // if id should be optional
-    // @Get(['', ':id'])
-    // getUsers() {
-    //     return 'You sent a get request to user endpoints';
-    // }
-
-        @Get(['',':id'])
+       @Get(['',':id'])
         @ApiOperation({
           summary: "fetches a list of registered usrs on the application"
         })
@@ -88,25 +63,13 @@ export class UsersController {
             return  this.usersService.findAll(getUserParamDto,limit,page)
          }
 
-
-   
-
         @Post()
         public createUsers(@Body() createUserdto: CreateUserDto){
-            console.log(typeof createUserdto);
-            console.log(createUserdto instanceof CreateUserDto);
-            
-            return 'You sent a POST request to users endpoint';
+        return this.usersService.createUser(createUserdto);
         }
 
 
-        // @Post()
-        // public createUsers(@Req() request: Request) {
-        //     console.log('Raw request:', request); // Should not be undefined
-        //      return 'You sent a POST request to users endpoint';
-        // }
-      
-      @Patch()  
+         @Patch()  
       public patchUser(@Body() patchUserDto: PatchUserDto) {
         return  patchUserDto;
       }
